@@ -1,0 +1,36 @@
+{
+    "name": "lidarr-true-singles",
+    "version": "1.0.0",
+    "description": "Automatically unmonitor promotional singles from lidarr.",
+    "main": "./src/app.js",
+    "engines": {
+        "node": ">=16.14.0"
+    },
+    "type": "module",
+    "scripts": {
+        "start": "node ./src/app.js",
+        "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx ./src"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/chxseh/lidarr-true-singles.git"
+    },
+    "keywords": [],
+    "author": "Chase <c@chse.dev> (https://chse.dev)",
+    "contributors": [
+        ""
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/chxseh/lidarr-true-singles/issues"
+    },
+    "homepage": "https://github.com/chxseh/lidarr-true-singles#readme",
+    "dependencies": {},
+    "devDependencies": {
+        "eslint": "8.31.0",
+        "eslint-config-chase": "1.0.5",
+        "eslint-plugin-import": "2.26.0",
+        "eslint-plugin-jsdoc": "39.6.4",
+        "eslint-plugin-unicorn": "45.0.2"
+    }
+}

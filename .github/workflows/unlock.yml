@@ -1,0 +1,21 @@
+---
+name: "🔓 Unlock Reopened Issues/PRs"
+
+on:
+  pull_request:
+    types:
+      - reopened
+  issues:
+    types:
+      - reopened
+
+jobs:
+  unlock:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: chxseh/action-lock-unlock@v1.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ github.event.pull_request.number || github.event.issue.number }}
+          lock: false
