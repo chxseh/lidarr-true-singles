@@ -1,5 +1,5 @@
 ---
-name: "📦 Update Docker Hub README"
+name: "📝 Update Docker Hub README"
 
 on:
   push:
