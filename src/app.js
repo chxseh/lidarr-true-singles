@@ -8,6 +8,7 @@ if (lidarrUrl.endsWith(`/`))
     lidarrUrl = lidarrUrl.slice(0, -1);
 
 const apiKey = process.env.LIDARR_API_KEY;
+const unmonitor = process.env.UNMONITOR || `false`;
 
 try
 {
@@ -57,7 +58,22 @@ for (const artistId of artistIdsObject)
             const trackName = trackList.find((track) => singleNamesLower.includes(track.title.toLowerCase())).title;
             const singleId = singleIds[singleNamesLower.indexOf(trackName.toLowerCase())];
             const artistName = artists.find((artist) => artist.id === artistId).artistName;
-            console.log(`"${ singleNames[singleIds.indexOf(singleId)] }" is also found on ${ album.title } by ${ artistName }`);
+            if (unmonitor === `true`)
+            {
+                await fetch(`${ lidarrUrl }/api/v1/album/monitor?apikey=${ apiKey }`, {
+                    method: `PUT`,
+                    headers: {
+                        "Content-Type": `application/json`
+                    },
+                    body: JSON.stringify({
+                        albumIds: [singleId],
+                        monitored: false
+                    })
+                });
+                console.log(`Unmonitored "${ singleNames[singleIds.indexOf(singleId)] }" by ${ artistName }`);
+            }
+            else
+                console.log(`"${ singleNames[singleIds.indexOf(singleId)] }" is also found on ${ album.title } by ${ artistName }`);
         }
     }
 }

@@ -15,10 +15,17 @@ Automatically unmonitor promotional singles from lidarr.
 ```bash
 docker run --rm \
     --name lidarr-true-singles \
-    -e LIDARR_URL=http://lidarr:8686 \
+    -e LIDARR_URL=http://localhost:8686 \
     -e LIDARR_API_KEY=your_api_key \
+    -e UNMONITOR=false \
     chxseh/lidarr-true-singles
 ```
+
+| Environment Variable | Description                            | Default               |
+| -------------------- | -------------------------------------- | --------------------- |
+| LIDARR_URL           | The url to your Lidarr instance        | http://localhost:8686 |
+| LIDARR_API_KEY       | Your Lidarr API Key                    |                       |
+| UNMONITOR            | Whether to unmonitor the tracks or not | false                 |
 
 ## Development
 ```bash
