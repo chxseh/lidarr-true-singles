@@ -10,3 +10,12 @@
 </h1></div>
 
 Automatically unmonitor promotional singles from lidarr.
+
+```bash
+git clone https://github.com/chxseh/lidarr-true-singles.git
+cd lidarr-true-singles
+npm i
+cp .env.example .env
+# edit .env with your lidarr url and api key
+node .
+```

@@ -25,7 +25,10 @@
         "url": "https://github.com/chxseh/lidarr-true-singles/issues"
     },
     "homepage": "https://github.com/chxseh/lidarr-true-singles#readme",
-    "dependencies": {},
+    "dependencies": {
+        "dotenv": "16.0.3",
+        "node-fetch": "^3.3.0"
+    },
     "devDependencies": {
         "eslint": "8.31.0",
         "eslint-config-chase": "1.0.5",
