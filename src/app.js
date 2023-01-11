@@ -9,6 +9,19 @@ if (lidarrUrl.endsWith(`/`))
 
 const apiKey = process.env.LIDARR_API_KEY;
 
+try
+{
+    let apiCheck = await fetch(`${ lidarrUrl }/api?apikey=${ apiKey }`);
+    apiCheck = await apiCheck.json();
+    if (!Object.prototype.hasOwnProperty.call(apiCheck, `current`))
+        throw new Error(`Lidarr API is not available. Do you have the right URL & API Key?`);
+}
+catch
+{
+    console.log(`Lidarr API is not available. Do you have the right URL & API Key?`);
+    process.exit(1);
+}
+
 let artists = await fetch(`${ lidarrUrl }/api/v1/artist?apikey=${ apiKey }`);
 artists = await artists.json();
 
@@ -24,10 +37,12 @@ for (const artistId of artistIdsObject)
     let everythingElse = albums.filter((album) => album.albumType !== `Single`);
     everythingElse = everythingElse.filter((album) => album.monitored === true);
 
+    const singleNamesLower = [];
     const singleNames = [];
     const singleIds = [];
     for (const single of singles)
     {
+        singleNamesLower.push(single.title.toLowerCase());
         singleNames.push(single.title);
         singleIds.push(single.id);
     }
@@ -37,10 +52,10 @@ for (const artistId of artistIdsObject)
         let trackList = await fetch(`${ lidarrUrl }/api/v1/track?artistId=${ artistId }&albumId=${ album.id }&apikey=${ apiKey }`);
         trackList = await trackList.json();
 
-        if (trackList.some((track) => singleNames.includes(track.title)))
+        if (trackList.some((track) => singleNamesLower.includes(track.title.toLowerCase())))
         {
-            const singleId = singleIds[singleNames.indexOf(trackList.find((track) => singleNames.includes(track.title)).title)];
-
+            const trackName = trackList.find((track) => singleNamesLower.includes(track.title.toLowerCase())).title;
+            const singleId = singleIds[singleNamesLower.indexOf(trackName.toLowerCase())];
             const artistName = artists.find((artist) => artist.id === artistId).artistName;
             console.log(`"${ singleNames[singleIds.indexOf(singleId)] }" is also found on ${ album.title } by ${ artistName }`);
         }
