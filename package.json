@@ -1,7 +1,7 @@
 {
     "name": "lidarr-true-singles",
     "version": "1.0.0",
-    "description": "Automatically unmonitor promotional singles from lidarr.",
+    "description": "Automatically unmonitor promotional singles from Lidarr.",
     "main": "./src/app.js",
     "engines": {
         "node": ">=16.14.0"

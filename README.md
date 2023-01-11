@@ -1,5 +1,5 @@
 <div align="center">
-<h1>lidarr-true-singles<br>
+<h1><a href="https://hub.docker.com/r/chxseh/lidarr-true-singles">lidarr-true-singles</a><br>
 <a href="https://chse.dev/donate"><img alt="Donate" src="https://badges.chse.dev:/badge/Donate_To_This_Project-brightgreen"></a>
 <a href="https://github.com/chxseh/lidarr-true-singles/actions/workflows/linter.yml"><img alt="GitHub Actions Status" src="https://github.com/chxseh/lidarr-true-singles/actions/workflows/linter.yml/badge.svg"></a>
 <a href="https://github.com/chxseh/lidarr-true-singles/stargazers"><img alt="Stars" src="https://badges.chse.dev:/github/stars/chxseh/lidarr-true-singles"></a>
@@ -9,7 +9,7 @@
 <a href="https://github.com/chxseh/lidarr-true-singles/blob/main/LICENSE.md"><img alt="License" src="https://badges.chse.dev:/github/license/chxseh/lidarr-true-singles"></a>
 </h1></div>
 
-Automatically unmonitor promotional singles from lidarr.
+Automatically unmonitor promotional singles from Lidarr.
 
 ## Running
 ```bash
@@ -33,6 +33,6 @@ git clone https://github.com/chxseh/lidarr-true-singles.git
 cd lidarr-true-singles
 npm i
 cp .env.example .env
-# edit .env with your lidarr url and api key
+# edit .env with your Lidarr url and api key
 node .
 ```
