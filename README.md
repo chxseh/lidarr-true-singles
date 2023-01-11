@@ -23,7 +23,7 @@ docker run --rm \
 
 | Environment Variable | Description                            | Default               |
 | -------------------- | -------------------------------------- | --------------------- |
-| LIDARR_URL           | The url to your Lidarr instance        | http://localhost:8686 |
+| LIDARR_URL           | The URL to your Lidarr instance        | http://localhost:8686 |
 | LIDARR_API_KEY       | Your Lidarr API Key                    |                       |
 | UNMONITOR            | Whether to unmonitor the tracks or not | false                 |
 
@@ -33,6 +33,6 @@ git clone https://github.com/chxseh/lidarr-true-singles.git
 cd lidarr-true-singles
 npm i
 cp .env.example .env
-# edit .env with your Lidarr url and api key
+# Edit .env with your Lidarr URL and API Key
 node .
 ```
