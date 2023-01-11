@@ -11,6 +11,16 @@
 
 Automatically unmonitor promotional singles from lidarr.
 
+## Running
+```bash
+docker run --rm \
+    --name lidarr-true-singles \
+    -e LIDARR_URL=http://lidarr:8686 \
+    -e LIDARR_API_KEY=your_api_key \
+    chxseh/lidarr-true-singles
+```
+
+## Development
 ```bash
 git clone https://github.com/chxseh/lidarr-true-singles.git
 cd lidarr-true-singles
