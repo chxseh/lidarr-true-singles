@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 
 config();
 
-let lidarrUrl = process.env.LIDARR_URL;
+let lidarrUrl = process.env.LIDARR_URL || `http://localhost:8686`;
 if (lidarrUrl.endsWith(`/`))
     lidarrUrl = lidarrUrl.slice(0, -1);
 
