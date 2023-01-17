@@ -18,7 +18,7 @@ docker run --rm \
     -e LIDARR_URL=http://localhost:8686 \
     -e LIDARR_API_KEY=your_api_key \
     -e UNMONITOR=false \
-    chxseh/lidarr-true-singles
+    ghcr.io/chxseh/lidarr-true-singles:latest
 ```
 
 | Environment Variable | Description                            | Default               |
