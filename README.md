@@ -18,14 +18,16 @@ docker run --rm \
     -e LIDARR_URL=http://localhost:8686 \
     -e LIDARR_API_KEY=your_api_key \
     -e UNMONITOR=false \
+    -e OUTPUT_UNMONITORED=false \
     ghcr.io/chxseh/lidarr-true-singles:latest
 ```
 
-| Environment Variable | Description                            | Default               |
-| -------------------- | -------------------------------------- | --------------------- |
-| LIDARR_URL           | The URL to your Lidarr instance        | http://localhost:8686 |
-| LIDARR_API_KEY       | Your Lidarr API Key                    |                       |
-| UNMONITOR            | Whether to unmonitor the tracks or not | false                 |
+| Environment Variable | Description                                                                                     | Default               |
+| -------------------- | ----------------------------------------------------------------------------------------------- | --------------------- |
+| LIDARR_URL           | The URL to your Lidarr instance                                                                 | http://localhost:8686 |
+| LIDARR_API_KEY       | Your Lidarr API Key                                                                             |                       |
+| UNMONITOR            | Whether to unmonitor the tracks or not                                                          | false                 |
+| OUTPUT_UNMONITORED   | Print unmonitored singles that are downloaded. Note that this overrides the `UNMONITOR` option. | false                 |
 
 ## Development
 ```bash
