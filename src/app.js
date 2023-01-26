@@ -49,45 +49,38 @@ for (const artistId of artistIdsObject)
         singleIds.push(single.id);
     }
 
-    if (printUnmonitored === `true`)
+    for (const album of everythingElse)
     {
-        for (const singleId of singleIds)
-        {
-            const artistName = artists.find((artist) => artist.id === artistId).artistName;
-            const single = singles.find((album) => album.id === singleId);
-            if (single.statistics.trackFileCount > 0)
-                console.log(`"${ singleNames[singleIds.indexOf(singleId)] }" by ${ artistName } is downloaded but unmonitored, consider deleting it. ${ lidarrUrl }/album/${ single.foreignAlbumId }`);
-        }
-    }
-    else if (printUnmonitored === `false`)
-    {
-        for (const album of everythingElse)
-        {
-            let trackList = await fetch(`${ lidarrUrl }/api/v1/track?artistId=${ artistId }&albumId=${ album.id }&apikey=${ apiKey }`);
-            trackList = await trackList.json();
+        let trackList = await fetch(`${ lidarrUrl }/api/v1/track?artistId=${ artistId }&albumId=${ album.id }&apikey=${ apiKey }`);
+        trackList = await trackList.json();
 
-            if (trackList.some((track) => singleNamesLower.includes(track.title.toLowerCase())))
+        if (trackList.some((track) => singleNamesLower.includes(track.title.toLowerCase())))
+        {
+            const trackName = trackList.find((track) => singleNamesLower.includes(track.title.toLowerCase())).title;
+            const singleId = singleIds[singleNamesLower.indexOf(trackName.toLowerCase())];
+            const artistName = artists.find((artist) => artist.id === artistId).artistName;
+            if (printUnmonitored === `true`)
             {
-                const trackName = trackList.find((track) => singleNamesLower.includes(track.title.toLowerCase())).title;
-                const singleId = singleIds[singleNamesLower.indexOf(trackName.toLowerCase())];
-                const artistName = artists.find((artist) => artist.id === artistId).artistName;
-                if (unmonitor === `true`)
-                {
-                    await fetch(`${ lidarrUrl }/api/v1/album/monitor?apikey=${ apiKey }`, {
-                        method: `PUT`,
-                        headers: {
-                            "Content-Type": `application/json`
-                        },
-                        body: JSON.stringify({
-                            albumIds: [singleId],
-                            monitored: false
-                        })
-                    });
-                    console.log(`Unmonitored "${ singleNames[singleIds.indexOf(singleId)] }" by ${ artistName }`);
-                }
-                else
-                    console.log(`"${ singleNames[singleIds.indexOf(singleId)] }" is also found on ${ album.title } by ${ artistName }`);
+                const single = singles.find((album) => album.id === singleId);
+                if (single.statistics.trackFileCount > 0)
+                    console.log(`"${ singleNames[singleIds.indexOf(singleId)] }" by ${ artistName } is downloaded but unmonitored, consider deleting it. ${ lidarrUrl }/album/${ single.foreignAlbumId }`);
             }
+            else if (printUnmonitored === `false` && unmonitor === `true`)
+            {
+                await fetch(`${ lidarrUrl }/api/v1/album/monitor?apikey=${ apiKey }`, {
+                    method: `PUT`,
+                    headers: {
+                        "Content-Type": `application/json`
+                    },
+                    body: JSON.stringify({
+                        albumIds: [singleId],
+                        monitored: false
+                    })
+                });
+                console.log(`Unmonitored "${ singleNames[singleIds.indexOf(singleId)] }" by ${ artistName }`);
+            }
+            else if (printUnmonitored === `false` && unmonitor === `false`)
+                console.log(`"${ singleNames[singleIds.indexOf(singleId)] }" is also found on ${ album.title } by ${ artistName }`);
         }
     }
 }
