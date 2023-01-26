@@ -27,7 +27,7 @@ catch
 let artists = await fetch(`${ lidarrUrl }/api/v1/artist?apikey=${ apiKey }`);
 artists = await artists.json();
 
-const artistIdsObject = artists.map((artist) => artist.artistMetadataId);
+const artistIdsObject = artists.map((artist) => artist.id); // Used to be artist.artistMetadataId but it wasn't returning the correct results?
 
 for (const artistId of artistIdsObject)
 {
@@ -51,6 +51,10 @@ for (const artistId of artistIdsObject)
 
     for (const album of everythingElse)
     {
+        if (album.releaseDate > new Date().toISOString())
+            // eslint-disable-next-line no-continue
+            continue; // Allow duplicate singles to be monitored if the album they are on is not released yet.
+
         let trackList = await fetch(`${ lidarrUrl }/api/v1/track?artistId=${ artistId }&albumId=${ album.id }&apikey=${ apiKey }`);
         trackList = await trackList.json();
 
