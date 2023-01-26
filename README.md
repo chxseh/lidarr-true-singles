@@ -18,6 +18,7 @@ docker run --rm \
     -e LIDARR_URL=http://localhost:8686 \
     -e LIDARR_API_KEY=your_api_key \
     -e UNMONITOR=false \
+    -e DELETE=false \
     -e OUTPUT_UNMONITORED=false \
     ghcr.io/chxseh/lidarr-true-singles:latest
 ```
@@ -27,14 +28,16 @@ docker run --rm \
 | `LIDARR_URL`         | The URL to your Lidarr instance                                                                 | `http://localhost:8686` |
 | `LIDARR_API_KEY`     | Your Lidarr API Key                                                                             |                         |
 | `UNMONITOR`          | Whether to unmonitor the tracks or not                                                          | `false`                 |
+| `DELETE`             | Whether to delete the tracks or not                                                             | `false`                 |
 | `OUTPUT_UNMONITORED` | Print unmonitored singles that are downloaded. Note that this overrides the `UNMONITOR` option. | `false`                 |
 
-| Variable             | Option  | Effect                                                                                                  |
-| -------------------- | ------- | ------------------------------------------------------------------------------------------------------- |
-| `MONITOR`            | `false` | Will *just* tell you what singles it finds on albums                                                    |
-| `MONITOR`            | `true`  | Will *just* unmonitor said singles and let you know that it unmonitored them                            |
-| `OUTPUT_UNMONITORED` | `false` | Will do nothing (falls back to what you have `MONITOR` set to, if any)                                  |
-| `OUTPUT_UNMONITORED` | `true`  | Will *just* tell you about **any** single that is unmonitored and downloaded, with a link to delete it. |
+| Environment Variable                       | Outcome                                                  |
+| ------------------------------------------ | -------------------------------------------------------- |
+| `UNMONITOR=false`                          | See duplicate singles                                    |
+| `UNMONITOR=true`                           | Unmonitor duplicate singles                              |
+| `UNMONITOR=true`<br>`DELETE=true`          | Delete duplicate singles                                 |
+| `OUTPUT_UNMONITORED=true`                  | See duplicate unmonitored singles that are downloaded    |
+| `OUTPUT_UNMONITORED=true`<br>`DELETE=true` | Delete duplicate unmonitored singles that are downloaded |
 
 ## Development
 ```bash

@@ -10,6 +10,7 @@ if (lidarrUrl.endsWith(`/`))
 const apiKey = process.env.LIDARR_API_KEY;
 const unmonitor = process.env.UNMONITOR || `false`;
 const printUnmonitored = process.env.OUTPUT_UNMONITORED || `false`;
+const doDelete = process.env.DELETE || `false`;
 
 try
 {
@@ -67,7 +68,20 @@ for (const artistId of artistIdsObject)
             {
                 const single = singles.find((album) => album.id === singleId);
                 if (single.statistics.trackFileCount > 0)
-                    console.log(`"${ singleNames[singleIds.indexOf(singleId)] }" by ${ artistName } is downloaded but unmonitored, consider deleting it. ${ lidarrUrl }/album/${ single.foreignAlbumId }`);
+                {
+                    if (doDelete === `true`)
+                    {
+                        await fetch(`${ lidarrUrl }/api/v1/album/${ singleId }?apikey=${ apiKey }`, {
+                            method: `DELETE`,
+                            headers: {
+                                "Content-Type": `application/json`
+                            },
+                        });
+                        console.log(`"${ singleNames[singleIds.indexOf(singleId)] }" by ${ artistName } deleted.`);
+                    }
+                    else
+                        console.log(`"${ singleNames[singleIds.indexOf(singleId)] }" by ${ artistName } is downloaded but unmonitored, consider deleting it. ${ lidarrUrl }/album/${ single.foreignAlbumId }`);
+                }
             }
             else if (printUnmonitored === `false` && unmonitor === `true`)
             {
@@ -79,9 +93,20 @@ for (const artistId of artistIdsObject)
                     body: JSON.stringify({
                         albumIds: [singleId],
                         monitored: false
-                    })
+                    }),
                 });
-                console.log(`Unmonitored "${ singleNames[singleIds.indexOf(singleId)] }" by ${ artistName }`);
+                if (doDelete === `true`)
+                {
+                    await fetch(`${ lidarrUrl }/api/v1/album/${ singleId }?apikey=${ apiKey }`, {
+                        method: `DELETE`,
+                        headers: {
+                            "Content-Type": `application/json`
+                        },
+                    });
+                    console.log(`"${ singleNames[singleIds.indexOf(singleId)] }" by ${ artistName } unmonitored & deleted.`);
+                }
+                else
+                    console.log(`Unmonitored "${ singleNames[singleIds.indexOf(singleId)] }" by ${ artistName }`);
             }
             else if (printUnmonitored === `false` && unmonitor === `false`)
                 console.log(`"${ singleNames[singleIds.indexOf(singleId)] }" is also found on ${ album.title } by ${ artistName }`);
