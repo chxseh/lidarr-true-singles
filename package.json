@@ -30,7 +30,7 @@
         "node-fetch": "3.3.0"
     },
     "devDependencies": {
-        "eslint": "8.33.0",
+        "eslint": "8.34.0",
         "eslint-config-chase": "1.0.6",
         "eslint-plugin-import": "2.27.5",
         "eslint-plugin-jsdoc": "39.8.0",
