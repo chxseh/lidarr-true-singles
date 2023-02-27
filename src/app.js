@@ -17,11 +17,11 @@ try
     let apiCheck = await fetch(`${ lidarrUrl }/api?apikey=${ apiKey }`);
     apiCheck = await apiCheck.json();
     if (!Object.prototype.hasOwnProperty.call(apiCheck, `current`))
-        throw new Error(`Lidarr API is not available. Do you have the right URL & API Key?`);
+        throw new Error(`Lidarr API is not available.`);
 }
 catch
 {
-    console.log(`Lidarr API is not available. Do you have the right URL & API Key?`);
+    console.log(`Lidarr API is not available.\nDo you have the right URL & API Key?\nYou also need to be on the latest develop version of Lidarr.`);
     process.exit(1);
 }
 
