@@ -31,7 +31,7 @@
     },
     "devDependencies": {
         "eslint": "8.35.0",
-        "eslint-config-chase": "1.0.6",
+        "eslint-config-chase": "1.0.7",
         "eslint-plugin-import": "2.27.5",
         "eslint-plugin-jsdoc": "40.0.0",
         "eslint-plugin-unicorn": "45.0.2"
