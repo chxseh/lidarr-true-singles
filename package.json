@@ -27,7 +27,7 @@
     "homepage": "https://github.com/chxseh/lidarr-true-singles#readme",
     "dependencies": {
         "dotenv": "16.0.3",
-        "node-fetch": "3.3.0"
+        "node-fetch": "3.3.1"
     },
     "devDependencies": {
         "eslint": "8.36.0",
